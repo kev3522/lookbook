@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Kevin Min Hwan Kim">
+	</head>
+	<body>
+		<div class="auth-container">
+			<mat-tab-group>
+				<mat-tab label="Register">
+					<mat-card class="registration">
+						<mat-form-field class="info">
+							<input matInput id="display" placeholder="Display name" #display>
+						</mat-form-field>
+						<p class="alert" id="displayAlert" #displayAlert>
+							Invalid format. Name must only contain letters and numbers.
+						</p>
+						<mat-form-field class="info">
+							<input matInput id="email" placeholder="Email" #email>
+						</mat-form-field>
+						<p class="alert" id="emailAlert" #emailAlert>
+							Invalid format. Email address must follow the format name@example.com.
+						</p>
+						<mat-form-field class="info">
+							<input matInput id="phone" placeholder="Phone number" #phone>
+						</mat-form-field>
+						<p class="alert" id="phoneAlert" #phoneAlert>
+							Invalid format. Phone number must follow the format 123-123-1234.
+						</p>
+						<mat-form-field class="info">
+							<input matInput id="zipcode" placeholder="Zipcode" #zipcode>
+						</mat-form-field>
+						<p class="alert" id="zipcodeAlert" #zipcodeAlert>
+							Invalid format. Zipcode must be a 5-digit number.
+						</p>
+						<mat-form-field class="info">
+							<input matInput type="date" id="dob" placeholder="Date of Birth" #dob>
+						</mat-form-field>
+						<mat-form-field class="info">
+							<input matInput type="password" id="password" placeholder="Password" #password>
+						</mat-form-field>
+						<p class="alert" id="passwordAlert" #passwordAlert>
+							Invalid format. Passwords must match and be a three-pass-phrase.
+						</p>
+						<mat-form-field class="info">
+							<input matInput type="password" id="passwordconfirm" placeholder="Password" #passwordconfirm>
+						</mat-form-field>
+						<br>
+						<button mat-button id="register" #register (click)="doRegister(display.value, email.value, phone.value, zipcode.value, dob.value, password.value, passwordconfirm.value, bottomRegister)">Register</button>
+						<div id="bottomRegister" #bottomRegister></div>
+					</mat-card>
+				</mat-tab>
+				<mat-tab label="Login">
+					<mat-card class="login">
+						<mat-form-field class="info">
+							<input matInput id="loginName" placeholder="Username" #loginName>
+						</mat-form-field>
+						<mat-form-field class="info">
+							<input matInput type="password" id="loginPassword" placeholder="Password" #loginPassword>
+						</mat-form-field>
+						<p class="alert" style="font-style:italic" id="loginAlert" #loginAlert>
+							Invalid login!
+						</p>
+						<br>
+						<button mat-button id="login" #login (click)="doLogin(loginName.value, loginPassword.value, loginAlert)">Login</button>
+						<div>
+							<br>
+							<p>Testuser login credentials:</p>
+							<p>username: testuser</p>
+							<p>password: pass-pass-pass</p>
+						</div>
+						<a href="https://spooky-corpse-96953.herokuapp.com/login/facebook">Facebook</a>
+					</mat-card>
+				</mat-tab>
+			</mat-tab-group>
+		</div>
+	</body>
+</html>

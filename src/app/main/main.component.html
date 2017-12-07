@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Kevin Min Hwan Kim">
+	</head>
+	<body>
+		<mat-toolbar class="nav" color="warn">
+			<span class="fill"></span>
+			<mat-chip-list class="navbar">
+				<mat-chip color="primary" routerLink="/auth" routerLinkActive="active" #toauth (click)="logout()">Logout</mat-chip>
+				<mat-chip routerLink="/profile" routerLinkActive="active" #profilebtn>Profile</mat-chip>
+				<router-outlet></router-outlet>
+			</mat-chip-list>
+		</mat-toolbar>
+		<div class="container">
+			<div class="sidebar">
+				<mat-card class="userinfo">
+					<mat-card class="borderless-card">
+						<mat-card-title-group>
+							<mat-card-title id="user_name"> {{ load_name }} </mat-card-title>
+							<img mat-card-sm-image id="user_img" *ngIf="avatar" [src]="avatar" alt="Image" />
+						</mat-card-title-group>
+						<mat-card-content>
+							<h5 id="userstatus" #userstatus> {{ status }} </h5>
+							<div>
+								<mat-form-field>
+									<input matInput type="text" id="newstatus" #newstatus placeholder="Type status here">
+								</mat-form-field>
+								<br>
+								<button mat-button id="updatestatus" #updatestatus (click)="updateStatus(newstatus)">Update</button>
+							</div>
+						</mat-card-content>
+					</mat-card>
+				</mat-card>
+				<app-following></app-following>
+			</div>
+			<div class="posts">
+				<app-article></app-article>
+			</div>
+		</div>
+	</body>
+</html>

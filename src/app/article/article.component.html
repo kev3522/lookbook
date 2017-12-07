@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Kevin Min Hwan Kim">
+	</head>
+	<body>
+		<mat-card class="newpost">
+			<mat-form-field id="newposttext">
+				<input matInput type="text" placeholder="Write something here" #newposttext>
+			</mat-form-field>
+			<br>
+			<label for="addimage">Add Local Image:</label>
+			<input type="file" name="addimage" accept="image/*" #articleimage>
+			<br>
+			<button mat-button id="cancelbtn" #cancelarticle (click)="cancelArticle(newposttext)">Cancel</button>
+			<button mat-button id="postbtn" #postarticle (click)="addArticle(newposttext, articleimage)">Post</button>
+		</mat-card>
+		<mat-card class="search">
+			<mat-form-field id="searchbar">
+				<input matInput type="text" placeholder="Search Posts" #searchbar>
+			</mat-form-field>
+			<button mat-button id="searchbtn" #searchbtn (click)="searchArticles(searchbar.value)">Search</button>
+			<button mat-button #reset (click)="resetSearch(searchbar)">Reset</button>
+		</mat-card>
+		<div class="articles">
+			<mat-card *ngFor="let article of sitearticles" id="article">
+				<mat-card-header>
+					<mat-card-title class="articleAuthor">
+						{{ article["author"] }}
+					</mat-card-title>
+					<mat-card-subtitle class="articleDate">
+						{{ article["date"] }}
+					</mat-card-subtitle>
+					<img mat-card-avatar *ngIf="this.userAvatars" [src]="this.userAvatars[article['author']]">
+				</mat-card-header>
+				<mat-card-content>
+					<div class="articleImg" *ngIf="article['img'] != '' && article['img'] != null">
+						<img id="art_img" [src]="article['img']" alt="Image"/>
+					</div>
+					<div class="articleText" #contenttext>
+						<h4>{{ article["body"] }}</h4>
+					</div>
+				</mat-card-content>
+				<div class="articleActions">
+					<div>
+						<mat-form-field>
+							<input matInput type="text" id="newbody" #newbody placeholder="Edit article">
+						</mat-form-field>
+						<button id="articleeditbtn" class="btn btn-link" (click)="editArticle(newbody, article.id)">Edit</button>
+					</div>
+				</div>
+				<mat-card-actions>
+					<button mat-button onclick="this.parentNode.nextSibling.nextSibling.style.display= this.parentNode.nextSibling.nextSibling.style.display == 'none' ? 'block': 'none'">Comments</button>
+					<button mat-button *ngIf='loggedUser == article["author"]' onclick="this.parentNode.previousSibling.previousSibling.style.display='block'">Edit</button>
+				</mat-card-actions>
+				<div class="comments-container">
+					<div class="commentSection" #commentSection *ngFor="let comment of article['comments']">
+						<ng-container>
+							<mat-card class="borderless-card">
+								<img mat-card-avatar *ngIf="this.userAvatars" [src]="this.userAvatars[comment['author']]">
+								{{ comment["author"] }}: {{ comment["body"] }}
+								<mat-card-actions>
+									<button mat-button *ngIf='loggedUser == comment["author"]' onclick="this.nextSibling.nextSibling.style.display='block'">Edit</button>
+									<span class="editcommentwrap">
+										<mat-form-field>
+											<input matInput type="text" id="newcommentbody" #newcommentbody placeholder="Edit comment">
+										</mat-form-field>
+										<button id="commenteditbtn" class="btn btn-link" (click)="editComment(newcommentbody, article.id, comment.commentId)">Post</button>
+									</span>
+								</mat-card-actions>
+							</mat-card>
+						</ng-container>
+					</div>
+					<div>
+						<mat-form-field>
+							<input matInput type="text" #newcomment placeholder="Post comment">
+						</mat-form-field>
+						<button class="btn btn-link" #commentbtn (click)="editComment(newcomment, article.id, -1)">Comment</button>
+					</div>
+				</div>
+			</mat-card>
+			<p id="viewlim">Currently displaying a maximum of {{ viewlim }} recent articles</p>
+		</div>
+	</body>
+</html>

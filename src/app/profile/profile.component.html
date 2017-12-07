@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Kevin Min Hwan Kim">
+	</head>
+	<body>
+		<mat-toolbar class="nav" color="warn">
+			<span class="fill"></span>
+			<mat-chip-list class="navbar">
+				<mat-chip routerLink="/main" routerLinkActive="active" #mainpage>Main Page</mat-chip>
+				<router-outlet></router-outlet>
+			</mat-chip-list>
+		</mat-toolbar>
+		<div class="profile-container">
+			<mat-card class="currentinfo">
+				<img id="user_img" *ngIf="myprofile['image']" [src]="myprofile['image']" alt="Image" #user_img />
+				<div class="infolist">
+					<p id="currentname" #currentname>Name: {{ myprofile["name"] }}</p>
+					<p id="currentemail" #currentemail>Email: {{ myprofile["email"] }}</p>
+					<p id="currentzipcode" #currentzipcode>Zipcode: {{ myprofile["zipcode"] }}</p>
+					<P id="currentdob" #currentDOB>Date of Birth: {{ myprofile["dob"] }}</P>
+				</div>
+			</mat-card>
+			<mat-card class="linkinfo">
+				<div>
+					<p>Note: You can only link existing accounts.</p>
+					<div>
+						<span>Link Local to OAuth:</span>
+						<a mat-button href="https://spooky-corpse-96953.herokuapp.com/login/facebook">Facebook Login</a>
+					</div>
+					<div>
+						<span>Link OAuth to Local:</span>
+						<div>
+							<input #link_username placeholder="username" />
+							<input #link_password type="password" placeholder="password" />
+							<button mat-button (click)="linkLocal(link_username, link_password, linkloginalert)">Lookbook Login</button>
+						</div>
+						<div id="localalert">
+							<p class="alert" #linkloginalert>Wrong login!</p>
+						</div>
+					</div>
+					<div>
+						<a href="https://spooky-corpse-96953.herokuapp.com/unlink/facebook">Unlink Facebook</a>
+					</div>
+				</div>
+			</mat-card>
+			<mat-card class="updateinfo">
+				<mat-card-header>
+					<mat-card-title>
+						Edit Information
+					</mat-card-title>
+				</mat-card-header>
+				<div class="newpicture">
+					<input type="file" name="changeimage" accept="image/*" #newimage />
+					<button class="btn btn-link" #changeimage (click)="handleImageChange(newimage.files)">Upload</button>
+				</div>
+				<div style="display:none">
+					<mat-form-field class="info">
+						<input matInput type="text" placeholder="Name" #updatename>
+					</mat-form-field>
+					<p class="alert" #displayAlert>
+						Invalid format. Name must only contain letters and numbers.
+					</p>
+				</div>
+				<div>
+					<mat-form-field class="info">
+						<input matInput type="text" placeholder="Email" id="updateemail" #updateemail>
+					</mat-form-field>
+					<p class="alert" #emailAlert>
+						Invalid format. Email address must follow the format name@example.com.
+					</p>
+				</div>
+				<div style="display: none">
+					<mat-form-field class="info">
+						<input matInput type="text" placeholder="Phone" #updatephone>
+					</mat-form-field>
+					<p class="alert" #phoneAlert>
+						Invalid format. Phone number must follow the format 123-123-1234.
+					</p>
+				</div>
+				<div>
+					<mat-form-field class="info">
+						<input matInput type="text" placeholder="Zipcode" id="updatezipcode" #updatezipcode>
+					</mat-form-field>
+					<p class="alert" #zipcodeAlert>
+						Invalid format. Zipcode must be a 5-digit number.
+					</p>
+				</div>
+				<div>
+					<mat-form-field class="info">
+						<input matInput type="password" placeholder="Password" id="updatepassword" #updatepassword>
+					</mat-form-field>
+					<p id="passwordAlert" class="alert" style="display:block" #passwordAlert>You can't change your password right now, sorry!</p>
+				</div>
+				<div>
+					<mat-form-field class="info">
+						<input matInput type="password" placeholder="Password Confirm" id="updatepasswordconfirm" #updatepasswordconfirm>
+					</mat-form-field>
+				</div>
+				<button mat-button id="updatebtn" #update (click)="doValidate(updatename.value, updateemail.value, updatephone.value, updatezipcode.value, updatepassword.value, updatepasswordconfirm.value)">Update Information</button>
+			</mat-card>
+		</div>
+	</body>
+</html>	

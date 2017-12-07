@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="frontend App" timestamp="2017-11-15T15:43:20" hostname="localhost" time="14.554" errors="0" tests="12" skipped="0" disabled="0" failures="0">
+  <testcase classname="frontend App" name="should display welcome message" time="0.818" />
+  <testcase classname="frontend App" name="should register a user" time="1.424" />
+  <testcase classname="frontend App" name="should login a user" time="0.234" />
+  <testcase classname="frontend App" name="should create new article and validate article appears in feed" time="1.81" />
+  <testcase classname="frontend App" name="should edit an article and validate changed article text" time="1.293" />
+  <testcase classname="frontend App" name="should update headline headline and verify change" time="1.237" />
+  <testcase classname="frontend App" name="should add the Follower user and verify follower count increments" time="1.227" />
+  <testcase classname="frontend App" name="should remove the Follower user and verify following count decreases by one" time="1.091" />
+  <testcase classname="frontend App" name="should search for special article and verify author" time="1.212" />
+  <testcase classname="frontend App" name="should update user email and verify" time="1.722" />
+  <testcase classname="frontend App" name="should update user zipcode and verify" time="1.209" />
+  <testcase classname="frontend App" name="should update user password and verify" time="1.274" />
+ </testsuite>
+</testsuites>

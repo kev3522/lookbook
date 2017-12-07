@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Kevin Min Hwan Kim">
+	</head>
+	<body>
+		<mat-card class="friends">
+			<div class="friend" *ngFor="let follow of follows">
+				<mat-card class="borderless-card">
+					<mat-card-title-group>
+						<mat-card-title class="followername"> {{ follow['username'] }} </mat-card-title>
+						<img mat-card-sm-image id="follow_img" *ngIf="follow['img']" [src]="follow['img']" alt="Image">
+					</mat-card-title-group>
+					<mat-card-content>
+						<br>
+						<h5> {{ follow["status"] }}</h5>
+					</mat-card-content>
+					<mat-card-actions>
+						<button mat-button id="removefriendbtn" (click)="removefriend(follow['username'])">Unfollow {{ follow["username"] }}</button>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+			<div>
+				<mat-form-field>
+					<input matInput id="newfriendname" type="text" placeholder="Enter name" #newfriendname>
+				</mat-form-field>
+				<br>
+				<button mat-button id="addfriendbtn" #addfriend (click)="addnewfriend(newfriendname)">Add</button>
+				<div style="visibility:hidden" #friendAlert>That person doesn't exist!</div>
+			</div>
+		</mat-card>
+	</body>
+</html>
